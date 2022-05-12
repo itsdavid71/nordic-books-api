@@ -1,0 +1,245 @@
+* {
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+body {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+#library {
+  padding: 20px;
+}
+
+.top-library {
+  background: #f2f2f2;
+  padding: 20px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border-radius: 10px;
+}
+
+h1 {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 10px;
+}
+
+.all_books {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 20px 0;
+}
+
+.book_item {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  display: inline-block;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+.book_content {
+  padding: 20px;
+  margin: 10px;
+  height: 100%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.btn {
+  margin: 10px 10px 10px 0;
+  width: 100%;
+}
+
+.form-style {
+  padding: 20px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 20px 0;
+}
+
+.form-style h2 {
+  text-align: center;
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  padding: 10px;
+  border-radius: 5px;
+  color: #fff;
+  background: #54a55b;
+}
+
+.form-style .h2-second {
+  background: #4855ad;
+}
+
+.form-style form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.form-style form .form-button {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.form-style form .form-button button {
+  width: auto;
+}
+
+.form-style input {
+  border: 1px solid rgba(34, 34, 34, 0.4);
+  padding: 10px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border-radius: 5px;
+  display: inline-block;
+  max-width: 400px;
+  width: 100%;
+  margin: 10px;
+}
+
+.book_title {
+  font-weight: bold;
+  font-size: 18px;
+  margin: 20px 0;
+}
+
+.book_img {
+  max-height: 250px;
+  width: auto;
+  height: 250px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+#editForm {
+  padding: 20px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border: none;
+}
+
+#editForm button {
+  width: 100%;
+}
+
+.edit-popup {
+  background: rgba(0, 0, 0, 0.7);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.edit-content {
+  background: #fff;
+  padding: 10px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  text-align: center;
+  border-radius: 10px;
+  min-height: 150px;
+}
+
+.edit-content h2 {
+  font-size: 18px;
+}
+
+.edit-content input {
+  width: 100%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  border: 1px solid rgba(34, 34, 34, 0.4);
+  margin: 10px 0;
+}
+
+.comments_list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.comments_field {
+  max-width: 400px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.comments_field h3 {
+  font-size: 18px;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.comment-item {
+  background: #f2f6f9;
+  padding: 10px 15px;
+  border-radius: 5px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 10px 0;
+  max-width: 400px;
+  width: 100%;
+}
+
+.comment-item p {
+  margin-bottom: 5px;
+}
+
+.comment-name {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.comments-book-form {
+  max-width: 400px;
+}
+
+.comments-book-form input,
+.comments-book-form textarea {
+  width: 100%;
+  padding: 10px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 5px 0;
+  max-width: 400px;
+  border: 1px solid rgba(34, 34, 34, 0.4);
+}
+
+.comments-book-form button {
+  width: 100%;
+}
+/*# sourceMappingURL=style.css.map */

@@ -1,114 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Электронная библиотека</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-</head>
-<body>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div id="library">
+        <div class="top-library">
+          <h1>Электронная библиотека</h1>
 
-    <style>
-        body {
-            padding: 10px;
-            box-sizing: border-box;
-            font-family: 'Roboto', sans-serif;
-        }
-        .book_item {
-            padding: 20px;
-            background: rgb(231, 231, 231);
-            margin: 20px 0;
-            margin-right: 20px;
-            display: inline-block;
-            font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-        }
-        .book_title {
-            font-weight: bold;
-            font-size: 18px;
-        }
-
-        .book_img {
-            max-height: 250px;
-            width: auto;
-            object-fit: contain;
-        }
-        .edit-popup {
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            right: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            display: none;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .edit-content {
-            background: #fff;
-            padding: 10px;
-            box-sizing: border-box;
-            text-align: center;
-            border-radius: 10px;
-            min-height: 150px;
-        }
-        .edit-content input {
-            width: 100%;
-            box-sizing: border-box;
-            padding: 10px;
-            margin: 10px 0;
-        }
-    </style>
-    <h1>Электронная библиотека</h1>
-
-    <div class="action_library">
-        <h2>Добавление книги</h2>
-        <form id="addBook">
-            <input type="text" name="title" placeholder="Название книги">
-            <input type="text" name="author" placeholder="Автор книги">
-            <input type="text" name="userId" placeholder="User ID">
-            <input type="file" name="cover" id="cover" />
-            <button type="submit">Добавить</button>
-        </form>
-
-        <h2>Получить книги пользователя</h2>
-
-        <form id="userBooks">
-            <input type="text" name="userId" placeholder="User ID">
-            <button type="submit">Получить</button>
-        </form>
-
-        <div class="edit-popup" id="editFormField">
-            <div class="edit-content">
-                <h2>Редактирование книги</h2>
-                <form id="editForm">
-                    <input type="text" name="title" placeholder="Название книги">
-                    <input type="text" name="author" placeholder="Автор книги">
-                    <input type="hidden" name="id">
-                    <button type="submit">Сохранить</button>
-                </form>
-                <button class="popup_cancel">Отменить</button>
+          <div class="action_library">
+            <div class="form-style">
+              <h2>Добавление книги</h2>
+              <form id="addBook">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="title"
+                  placeholder="Название книги"
+                />
+                <input
+                  type="text"
+                  class="form-control"
+                  name="author"
+                  placeholder="Автор книги"
+                />
+                <input
+                  class="form-control"
+                  type="text"
+                  name="userId"
+                  placeholder="User ID"
+                />
+                <input
+                  type="file"
+                  name="cover"
+                  class="btn btn-light"
+                  id="cover"
+                />
+                <div class="form-button">
+                  <button type="submit" class="btn btn-success">
+                    Добавить
+                  </button>
+                </div>
+              </form>
             </div>
+
+            <div class="form-style">
+              <h2 class="h2-second text-truncate">
+                Получить книги пользователя
+              </h2>
+              <form id="userBooks">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="userId"
+                  placeholder="User ID"
+                />
+                <div class="form-button">
+                  <button type="submit" class="btn btn-success">
+                    Получить
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <div
+              class="edit-popup modal fade"
+              tabindex="-1"
+              aria-labelledby="editFormField"
+              aria-hidden="true"
+              id="editFormField"
+            >
+              <div class="edit-content modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="editFormFieldLabel">
+                      Редактирование книги
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <form id="editForm" class="modal-body">
+                    <input
+                      type="text"
+                      name="title"
+                      class="form-control"
+                      placeholder="Название книги"
+                    />
+                    <input
+                      type="text"
+                      name="author"
+                      class="form-control"
+                      placeholder="Автор книги"
+                    />
+                    <input
+                      type="file"
+                      name="cover"
+                      class="btn btn-light"
+                      id="cover_edit"
+                    />
+                    <input type="hidden" name="id" />
+                    <button type="submit" class="btn btn-success">
+                      Сохранить
+                    </button>
+                    <div
+                      class="popup_cancel btn btn-danger"
+                      data-bs-dismiss="modal"
+                    >
+                      Отменить
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        
+
+        <!-- <div class="sort_field">
+            <p class="sort_title">Сортировать:</p>
+            <div class="sort_buttons">
+                <button class="sort_button" data-sort="title">По названию</button>
+                <button class="sort_button" data-sort="author">По автору</button>
+            </div>
+        </div> -->
+
+        <div class="all_books"></div>
+      </div>
     </div>
-
-
-    <!-- <div class="sort_field">
-        <p class="sort_title">Сортировать:</p>
-        <div class="sort_buttons">
-            <button class="sort_button" data-sort="title">По названию</button>
-            <button class="sort_button" data-sort="author">По автору</button>
-        </div>
-    </div> -->
-
-    <div class="all_books"></div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
     <script src="main.js"></script>
-    
-</body>
+    <!-- <script src="async.js"></script> -->
+  </body>
 </html>

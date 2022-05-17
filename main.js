@@ -102,16 +102,42 @@ function init() {
     loaderDiv.remove();
   }
 
-  async function getBookAll() {
+  async function getPages() {
+    const response = await fetch(`${apiUrl}/books`);
+  }
+
+  function createPagination(totalPages) {
+    const paginationField = document.createElement("div");
+    paginationField.className = "pag-field";
+    for (let i = 1; i < totalPages + 1; i++) {
+      const paginationNum = document.createElement("a");
+      paginationNum.className = "pag-num";
+      paginationNum.innerText = i;
+      paginationNum.href = `?page=${i}`;
+      paginationNum.dataset.pageNum = i;
+      paginationField.append(paginationNum);
+    }
+
+    allBooksField.append(paginationField);
+    paginationField.addEventListener("click", (e) => {
+      if (!e.target.classList.contains("pag-num")) return;
+      e.preventDefault();
+      const nextPage = e.target.dataset.pageNum;
+      getBookAll(nextPage - 1);
+    });
+  }
+
+  async function getBookAll(page = 0) {
     allBooksField.innerHTML = "";
     showLoader(allBooksField);
-    const response = await fetch(`${apiUrl}/books`);
-    const books = await response.json();
-
+    const response = await fetch(`${apiUrl}/books?page=${page}`);
+    const data = await response.json();
+    const totalPages = data.totalPages;
+    createPagination(totalPages);
     hideLoader(allBooksField);
 
-    for (let i = 0; i < books.data.length; i++) {
-      addBook(books.data[i]);
+    for (let i = 0; i < data.data.length; i++) {
+      addBook(data.data[i]);
     }
 
     // Fetch/Then
@@ -338,6 +364,7 @@ function init() {
     })
       .then((response) => response.json())
       .then((response) => {
+        createPagination(response.totalPages);
         hideLoader(allBooksField);
         for (let i = 0; i < response.data.length; i++) {
           addBook(response.data[i]);

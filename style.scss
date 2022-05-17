@@ -198,3 +198,15 @@ h1 {
 .comments-book-form button {
   width: 100%;
 }
+.pag-field {
+  width: 100%;
+  padding: 20px 0;
+  box-sizing: border-box;
+  justify-content: center;
+  text-align: center;
+  flex-wrap: wrap;
+  align-items: center;
+  a {
+    margin: 10px;
+  }
+}

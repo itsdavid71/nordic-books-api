@@ -107,15 +107,20 @@ function init() {
   }
 
   function createPagination(totalPages) {
-    const paginationField = document.createElement("div");
-    paginationField.className = "pag-field";
+    const paginationNav = document.createElement("nav");
+    const paginationField = document.createElement("ul");
+    paginationField.className = "pag-field pagination pagination-sm";
     for (let i = 1; i < totalPages + 1; i++) {
+      const paginationNumLi = document.createElement("li");
+      paginationNumLi.className = "pag-num page-item";
       const paginationNum = document.createElement("a");
-      paginationNum.className = "pag-num";
+      paginationNum.className = "pag-num page-link";
       paginationNum.innerText = i;
       paginationNum.href = `?page=${i}`;
       paginationNum.dataset.pageNum = i;
-      paginationField.append(paginationNum);
+      paginationNumLi.append(paginationNum);
+      paginationField.append(paginationNumLi);
+      paginationNav.append(paginationField);
     }
 
     allBooksField.append(paginationField);

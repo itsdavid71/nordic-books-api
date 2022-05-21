@@ -2,8 +2,10 @@ function init() {
   const apiUrl = "https://nordic-books-api.herokuapp.com";
   const allBooksField = document.querySelector(".all_books");
   const addForm = document.getElementById("addBook");
+  const alertsField = document.getElementById("alerts");
   const editFormField = document.getElementById("editFormField");
   const editForm = document.getElementById("editForm");
+  const modalActions = editForm.querySelector(".modal-actions");
   const sortButtons = document.querySelector(".sort_buttons");
 
   // UserID Books
@@ -31,6 +33,9 @@ function init() {
     const bookContent = document.createElement("div");
     bookContent.className = "book_content card";
 
+    const bookInfo = document.createElement("div");
+    bookInfo.className = "book_info";
+
     const bookImg = document.createElement("img");
     bookImg.className = "book_img card-img-top";
 
@@ -39,19 +44,19 @@ function init() {
       bookImg.src = "http://scholamundi.org/images/placeholder.png";
     };
 
-    bookContent.append(bookImg);
+    bookInfo.append(bookImg);
 
     const bookName = document.createElement("p");
     bookName.className = "book_title";
     let checkBookName = el.title;
     if (checkBookName === "") checkBookName = "Без названия";
     bookName.innerHTML = checkBookName;
-    bookContent.append(bookName);
+    bookInfo.append(bookName);
 
     const bookAuthor = document.createElement("p");
     bookAuthor.className = "book_author";
     bookAuthor.innerHTML = `Автор: <b>${el.author}</b>`;
-    bookContent.append(bookAuthor);
+    bookInfo.append(bookAuthor);
 
     const bookUser = document.createElement("p");
     bookUser.className = "book_user";
@@ -61,27 +66,30 @@ function init() {
       bookUser.innerHTML = `Пользователь не указан`;
     }
 
-    bookContent.append(bookUser);
+    bookInfo.append(bookUser);
+    bookContent.append(bookInfo);
+
+    const bookActions = document.createElement("div");
+    bookActions.className = "book_actions";
+
+    const bookEdit = document.createElement("button");
+    bookEdit.className = "book_edit btn btn-outline-primary";
+    bookEdit.innerText = "Редактировать";
+    bookEdit.dataset.bookId = el._id;
+    bookActions.append(bookEdit);
 
     const bookDelete = document.createElement("button");
     bookDelete.className = "book_delete btn btn-danger";
     bookDelete.innerText = "Удалить";
     bookDelete.dataset.bookId = el._id;
-    bookContent.append(bookDelete);
-
-    const bookEdit = document.createElement("button");
-    bookEdit.className = "book_edit btn btn-warning";
-    // bookEdit.dataset.bsToggle = "modal";
-    // bookEdit.dataset.bsTarget = "#editFormField";
-    bookEdit.innerText = "Редактировать";
-    bookEdit.dataset.bookId = el._id;
-    bookContent.append(bookEdit);
+    bookActions.append(bookDelete);
 
     const bookComments = document.createElement("button");
-    bookComments.className = "book_comments btn btn-light";
+    bookComments.className = "book_comments btn btn-outline-dark";
     bookComments.innerText = "Открыть комментарии";
     bookComments.dataset.bookId = el._id;
-    bookContent.append(bookComments);
+    bookActions.append(bookComments);
+    bookContent.append(bookActions);
 
     bookItem.append(bookContent);
     allBooksField.append(bookItem);
@@ -102,17 +110,21 @@ function init() {
     loaderDiv.remove();
   }
 
-  async function getPages() {
-    const response = await fetch(`${apiUrl}/books`);
-  }
+  // async function getPages() {
+  //   const response = await fetch(`${apiUrl}/books`);
+  // }
 
-  function createPagination(totalPages) {
+  function createPagination(totalPages, currentPage) {
     const paginationNav = document.createElement("nav");
     const paginationField = document.createElement("ul");
-    paginationField.className = "pag-field pagination pagination-sm";
+    paginationField.className = "pag-field pagination justify-content-center";
     for (let i = 1; i < totalPages + 1; i++) {
       const paginationNumLi = document.createElement("li");
       paginationNumLi.className = "pag-num page-item";
+      if (i === currentPage + 1) {
+        paginationNumLi.classList.add("active");
+      }
+
       const paginationNum = document.createElement("a");
       paginationNum.className = "pag-num page-link";
       paginationNum.innerText = i;
@@ -124,25 +136,31 @@ function init() {
     }
 
     allBooksField.append(paginationField);
-    paginationField.addEventListener("click", (e) => {
-      if (!e.target.classList.contains("pag-num")) return;
-      e.preventDefault();
-      const nextPage = e.target.dataset.pageNum;
-      getBookAll(nextPage - 1);
-    });
   }
+
+  document.addEventListener("click", (e) => {
+    if (!e.target.classList.contains("pag-num")) return;
+    e.preventDefault();
+    const nextPage = e.target.dataset.pageNum;
+    getBookAll(nextPage - 1);
+  });
 
   async function getBookAll(page = 0) {
     allBooksField.innerHTML = "";
     showLoader(allBooksField);
-    const response = await fetch(`${apiUrl}/books?page=${page}`);
-    const data = await response.json();
-    const totalPages = data.totalPages;
-    createPagination(totalPages);
-    hideLoader(allBooksField);
+    try {
+      const response = await fetch(`${apiUrl}/books?page=${page}`);
+      const data = await response.json();
+      const totalPages = data.totalPages;
+      const currentPage = data.page;
+      hideLoader(allBooksField);
 
-    for (let i = 0; i < data.data.length; i++) {
-      addBook(data.data[i]);
+      for (let i = 0; i < data.data.length; i++) {
+        addBook(data.data[i]);
+      }
+      createPagination(totalPages, currentPage);
+    } catch (error) {
+      alert(error);
     }
 
     // Fetch/Then
@@ -190,16 +208,75 @@ function init() {
       });
   });
 
+  function addToast() {
+    document.insertAdjacentHTML = `
+      <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-body">
+          Hello, world! This is a toast message.
+          <div class="mt-2 pt-2 border-top">
+            <button type="button" class="btn btn-primary btn-sm">Take action</button>
+            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="toast">Close</button>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  // Countdown
+
+  function revertDelete(e, id, text, time) {
+    const alertItem = document.createElement("div");
+    alertItem.className =
+      "alert undo-delete alert-light alert-dismissible fade show";
+
+    alertItem.insertAdjacentHTML(
+      "beforeend",
+      ` <div class="countdown">
+          <div class="countdown-number">${time}</div>
+          <svg>
+            <circle style="animation: countdown ${time}s linear infinite forwards;" r="18" cx="20" cy="20"></circle>
+          </svg>
+        </div>
+        <div class="undo-delete-field">
+          <button type="button" class="btn btn-outline-danger undo-delete-button">Отменить удаление</button>
+        </div>`
+    );
+
+    let alertTime = alertItem.querySelector(".countdown-number");
+    let alertDeleteButton = alertItem.querySelector(".undo-delete-button");
+
+    setInterval(function () {
+      time = --time <= 0 ? 5 : time;
+      alertTime.textContent = time;
+    }, 1000);
+
+    let deleteTimer = setTimeout(() => {
+      alertItem.remove();
+
+      fetch(`${apiUrl}/books/${id}`, {
+        method: "DELETE",
+      }).then(() => {
+        e.remove();
+      });
+    }, time * 1000);
+
+    alertDeleteButton.addEventListener("click", () => {
+      alertItem.remove();
+      e.style.display = "block";
+      clearInterval(deleteTimer);
+    });
+    alertsField.append(alertItem);
+  }
+
   // Delete
   allBooksField.addEventListener("click", (e) => {
     if (!e.target.classList.contains("book_delete")) return;
     const bookId = e.target.dataset.bookId;
+    const bookItem = e.target.parentElement.parentElement.parentElement;
+    const alertTime = 5;
 
-    fetch(`${apiUrl}/books/${bookId}`, {
-      method: "DELETE",
-    }).then(() => {
-      e.target.parentElement.parentElement.remove();
-    });
+    console.log(revertDelete(bookItem, bookId, "Книга удалена", alertTime));
+    bookItem.style.display = "none";
   });
 
   // Comments
@@ -213,10 +290,16 @@ function init() {
   allBooksField.addEventListener("click", (e) => {
     if (!e.target.classList.contains("comment_submit")) return;
     e.preventDefault();
+
     const addCommentForm = e.target.parentElement;
     const nameComment = addCommentForm.name.value;
     const textComment = addCommentForm.comment.value;
     const bookId = addCommentForm.book_id.value;
+
+    if (nameComment == "" || textComment == "") {
+      alert("Заполните все поля");
+      return;
+    }
 
     fetch(`${apiUrl}/books/${bookId}/comments`, {
       method: "POST",
@@ -256,7 +339,7 @@ function init() {
     const commentsButton = document.createElement("button");
     commentsButton.innerText = "Отправить";
     commentsButton.type = "submit";
-    commentsButton.className = "comment_submit btn btn-success";
+    commentsButton.className = "comment_submit btn btn-primary";
     commentsForm.append(commentsButton);
     e.prepend(commentsForm);
   }
@@ -308,10 +391,9 @@ function init() {
     if (!e.target.classList.contains("book_edit")) return;
     updateBookModal.show();
     const bookId = e.target.dataset.bookId;
-
-    const currentItem = e.target.parentElement;
+    const currentItem = e.target.parentElement.parentElement;
     const currentTitle = currentItem.querySelector(".book_title");
-    const currentAuthor = currentItem.querySelector(".book_author");
+    const currentAuthor = currentItem.querySelector(".book_author b");
     const currentImg = currentItem.querySelector(".book_img");
 
     fetch(`${apiUrl}/books/${bookId}`)
@@ -321,30 +403,39 @@ function init() {
         editForm.author.value = data.author;
         editForm.title.value = data.title;
       });
+  });
+  editForm.addEventListener("submit", (e) => {
+    e.preventDefault();
 
-    editForm.addEventListener("submit", (e) => {
-      e.preventDefault();
+    const bookId = editForm.id.value;
+    const title = editForm.title.value;
+    const author = editForm.author.value;
 
-      const bookId = editForm.id.value;
-      const title = editForm.title.value;
-      const author = editForm.author.value;
+    const formData = new FormData();
+    formData.append("author", author);
+    formData.append("title", title);
+    formData.append("cover", cover_edit.files[0]);
 
-      const formData = new FormData();
-      formData.append("author", author);
-      formData.append("title", title);
-      formData.append("cover", cover_edit.files[0]);
+    modalActions.style.display = "none";
+    showLoader(editForm);
 
-      fetch(`${apiUrl}/books/${bookId}`, {
-        method: "PUT",
-        body: formData,
-      })
-        .then((res) => res.json())
-        .then((response) => {
-          currentTitle.innerText = title;
-          currentAuthor.innerText = author;
-          hidePopup();
-        });
-    });
+    fetch(`${apiUrl}/books/${bookId}`, {
+      method: "PUT",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((response) => {
+        getBook(bookId)
+          .then((data) => data.json())
+          .then((response) => {
+            currentTitle.innerText = title;
+            currentAuthor.innerText = author;
+          });
+        hidePopup();
+        updateBookModal.hide();
+        hideLoader(editForm);
+        modalActions.style.display = "block";
+      });
   });
 
   editFormField.addEventListener("click", (e) => {
@@ -369,7 +460,8 @@ function init() {
     })
       .then((response) => response.json())
       .then((response) => {
-        createPagination(response.totalPages);
+        const currentPage = response.page;
+        createPagination(response.totalPages, currentPage);
         hideLoader(allBooksField);
         for (let i = 0; i < response.data.length; i++) {
           addBook(response.data[i]);

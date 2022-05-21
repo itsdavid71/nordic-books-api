@@ -8,6 +8,7 @@ body {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   font-family: "Roboto", sans-serif;
+  background: #fff !important;
 }
 
 #library {
@@ -15,11 +16,13 @@ body {
 }
 
 .top-library {
-  background: #f2f2f2;
+  background: white;
   padding: 20px;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   border-radius: 10px;
+  -webkit-box-shadow: 0 0 50px rgba(34, 34, 34, 0.1);
+          box-shadow: 0 0 50px rgba(34, 34, 34, 0.1);
 }
 
 h1 {
@@ -46,14 +49,27 @@ h1 {
           box-sizing: border-box;
   display: inline-block;
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  -webkit-animation: fadeIn 0.2s ease;
+          animation: fadeIn 0.2s ease;
 }
 
 .book_content {
   padding: 20px;
   margin: 10px;
   height: 100%;
+  border: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  -webkit-box-shadow: 0 0 40px rgba(34, 34, 34, 0.1);
+          box-shadow: 0 0 40px rgba(34, 34, 34, 0.1);
 }
 
 .btn {
@@ -126,12 +142,25 @@ h1 {
   margin: 20px 0;
 }
 
+.book_info {
+  overflow: hidden;
+}
+
 .book_img {
   max-height: 250px;
   width: auto;
   height: 250px;
+  overflow: hidden;
   -o-object-fit: contain;
      object-fit: contain;
+  width: 100%;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.book_img:hover {
+  -webkit-transform: scale(1.03);
+          transform: scale(1.03);
 }
 
 #editForm {
@@ -147,9 +176,6 @@ h1 {
 
 .edit-popup {
   background: rgba(0, 0, 0, 0.7);
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -261,5 +287,134 @@ h1 {
 
 .pag-field a {
   margin: 10px;
+}
+
+.pag-field .pag-num {
+  margin: 0;
+}
+
+#alerts {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: fixed;
+  top: 10px;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  max-width: 250px;
+  width: 100%;
+  right: 10px;
+}
+
+#alerts .alert {
+  margin: 10px 0;
+  width: 100%;
+}
+
+#alerts .undo-delete {
+  background: #fcfcfc;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-shadow: 0 0 10px rgba(34, 34, 34, 0.2);
+          box-shadow: 0 0 10px rgba(34, 34, 34, 0.2);
+  padding: 10px;
+}
+
+#alerts .undo-delete p {
+  margin: 0;
+}
+
+.undo-delete-button {
+  margin: 0;
+}
+
+.countdown {
+  position: relative;
+  height: 40px;
+  width: 40px;
+  text-align: center;
+  margin-right: 10px;
+}
+
+.countdown-number {
+  color: #dc3545;
+  display: inline-block;
+  line-height: 40px;
+}
+
+.undo-delete-field {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+svg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  -webkit-transform: rotateY(-180deg) rotateZ(-90deg);
+          transform: rotateY(-180deg) rotateZ(-90deg);
+}
+
+svg circle {
+  stroke-dasharray: 113px;
+  stroke-dashoffset: 0px;
+  stroke-linecap: round;
+  stroke-width: 1px;
+  stroke: #dc3545;
+  fill: none;
+}
+
+.spinner-border {
+  margin: 20px 0;
+}
+
+.book_actions .btn {
+  margin: 5px 0;
+}
+
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes countdown {
+  from {
+    stroke-dashoffset: 0px;
+  }
+  to {
+    stroke-dashoffset: 113px;
+  }
+}
+
+@keyframes countdown {
+  from {
+    stroke-dashoffset: 0px;
+  }
+  to {
+    stroke-dashoffset: 113px;
+  }
 }
 /*# sourceMappingURL=style.css.map */

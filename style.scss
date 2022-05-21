@@ -7,6 +7,7 @@
 body {
   box-sizing: border-box;
   font-family: "Roboto", sans-serif;
+  background: #fff !important;
 }
 
 #library {
@@ -14,10 +15,11 @@ body {
 }
 
 .top-library {
-  background: rgb(242, 242, 242);
+  background: rgb(255, 255, 255);
   padding: 20px;
   box-sizing: border-box;
   border-radius: 10px;
+  box-shadow: 0 0 50px rgba(34, 34, 34, 0.1);
 }
 h1 {
   text-align: center;
@@ -35,12 +37,18 @@ h1 {
   box-sizing: border-box;
   display: inline-block;
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  animation: fadeIn 0.2s ease;
 }
 .book_content {
   padding: 20px;
   margin: 10px;
   height: 100%;
+  border: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   box-sizing: border-box;
+  box-shadow: 0 0 40px rgba(34, 34, 34, 0.1);
 }
 .btn {
   margin: 10px 10px 10px 0;
@@ -104,11 +112,21 @@ h1 {
   margin: 20px 0;
 }
 
+.book_info {
+  overflow: hidden;
+}
+
 .book_img {
   max-height: 250px;
   width: auto;
   height: 250px;
+  overflow: hidden;
   object-fit: contain;
+  width: 100%;
+  transition: 0.3s;
+  &:hover {
+    transform: scale(1.03);
+  }
 }
 #editForm {
   padding: 20px;
@@ -128,7 +146,6 @@ h1 {
   // width: 100%;
   // height: 100%;
   background: rgba(0, 0, 0, 0.7);
-  display: flex;
   justify-content: center;
   align-items: center;
 }
@@ -208,5 +225,100 @@ h1 {
   align-items: center;
   a {
     margin: 10px;
+  }
+  .pag-num {
+    margin: 0;
+  }
+}
+
+#alerts {
+  display: flex;
+  position: fixed;
+  top: 10px;
+  flex-wrap: wrap;
+  max-width: 250px;
+  width: 100%;
+  right: 10px;
+  .alert {
+    margin: 10px 0;
+    width: 100%;
+  }
+  .undo-delete {
+    background: #fcfcfc;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0 0 10px rgba(34, 34, 34, 0.2);
+    padding: 10px;
+    p {
+      margin: 0;
+    }
+  }
+}
+.undo-delete-button {
+  margin: 0;
+}
+
+.countdown {
+  position: relative;
+  height: 40px;
+  width: 40px;
+  text-align: center;
+  margin-right: 10px;
+}
+
+.countdown-number {
+  color: #dc3545;
+  display: inline-block;
+  line-height: 40px;
+}
+
+.undo-delete-field {
+  display: flex;
+  align-items: center;
+}
+
+svg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  transform: rotateY(-180deg) rotateZ(-90deg);
+}
+
+svg circle {
+  stroke-dasharray: 113px;
+  stroke-dashoffset: 0px;
+  stroke-linecap: round;
+  stroke-width: 1px;
+  stroke: #dc3545;
+  fill: none;
+}
+
+.spinner-border {
+  margin: 20px 0;
+}
+
+.book_actions {
+  .btn {
+    margin: 5px 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes countdown {
+  from {
+    stroke-dashoffset: 0px;
+  }
+  to {
+    stroke-dashoffset: 113px;
   }
 }

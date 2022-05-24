@@ -83,7 +83,6 @@ function init() {
     bookDelete.innerText = "Удалить";
     bookDelete.dataset.bookId = el._id;
     bookActions.append(bookDelete);
-
     const bookComments = document.createElement("button");
     bookComments.className = "book_comments btn btn-outline-dark";
     bookComments.innerText = "Открыть комментарии";
@@ -461,13 +460,13 @@ function init() {
       .then((response) => response.json())
       .then((response) => {
         const currentPage = response.page;
-        createPagination(response.totalPages, currentPage);
         hideLoader(allBooksField);
         for (let i = 0; i < response.data.length; i++) {
           addBook(response.data[i]);
         }
         if (response.data.length === 0)
           allBooksField.innerHTML = "Ничего не найдено";
+        createPagination(response.totalPages, currentPage);
       });
   });
 

@@ -48,11 +48,64 @@ h1 {
   flex-wrap: wrap;
   justify-content: space-between;
   box-sizing: border-box;
+  transition: 0.2s;
   box-shadow: 0 0 40px rgba(34, 34, 34, 0.1);
+  &:hover {
+    box-shadow: 0 0 40px rgba(34, 34, 34, 0.2);
+  }
 }
 .btn {
   margin: 10px 10px 10px 0;
   width: 100%;
+}
+
+.accordion-flex {
+  display: flex;
+  .accordion-item {
+    width: 50%;
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 0 10px;
+    border: none;
+    outline: none;
+    .accordion-body {
+      border: 1px solid #2222220f;
+      background: #fcfcfc;
+    }
+
+    .accordion-button {
+      padding: 0;
+    }
+    .accordion-button::after {
+      display: none;
+    }
+  }
+}
+.form-title {
+  text-align: center;
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  // display: inline-block;
+  padding: 15px 5px;
+  width: 100%;
+  border-radius: 5px 5px 0 0;
+  color: #fff;
+  background: rgb(84, 165, 91);
+  transition: 0.2s;
+  outline: none;
+  &:hover {
+    background: rgb(69, 128, 74);
+  }
+  &:focus {
+    outline: none !important;
+  }
+}
+.h2-second {
+  background: rgb(72, 85, 173);
+  &:hover {
+    background: rgb(60, 71, 143);
+  }
 }
 .form-style {
   padding: 20px;
@@ -60,20 +113,6 @@ h1 {
   // background: rgb(255, 255, 255);
   // border: 1px solid #222;
   margin: 20px 0;
-  h2 {
-    text-align: center;
-    font-size: 18px;
-    text-transform: uppercase;
-    letter-spacing: 5px;
-    // display: inline-block;
-    padding: 10px;
-    border-radius: 5px;
-    color: #fff;
-    background: rgb(84, 165, 91);
-  }
-  .h2-second {
-    background: rgb(72, 85, 173);
-  }
   form {
     display: flex;
     flex-wrap: wrap;

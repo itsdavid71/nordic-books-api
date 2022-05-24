@@ -68,8 +68,15 @@ h1 {
           justify-content: space-between;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
   -webkit-box-shadow: 0 0 40px rgba(34, 34, 34, 0.1);
           box-shadow: 0 0 40px rgba(34, 34, 34, 0.1);
+}
+
+.book_content:hover {
+  -webkit-box-shadow: 0 0 40px rgba(34, 34, 34, 0.2);
+          box-shadow: 0 0 40px rgba(34, 34, 34, 0.2);
 }
 
 .btn {
@@ -77,26 +84,71 @@ h1 {
   width: 100%;
 }
 
+.accordion-flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.accordion-flex .accordion-item {
+  width: 50%;
+  padding: 10px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0 10px;
+  border: none;
+  outline: none;
+}
+
+.accordion-flex .accordion-item .accordion-body {
+  border: 1px solid #2222220f;
+  background: #fcfcfc;
+}
+
+.accordion-flex .accordion-item .accordion-button {
+  padding: 0;
+}
+
+.accordion-flex .accordion-item .accordion-button::after {
+  display: none;
+}
+
+.form-title {
+  text-align: center;
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  padding: 15px 5px;
+  width: 100%;
+  border-radius: 5px 5px 0 0;
+  color: #fff;
+  background: #54a55b;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  outline: none;
+}
+
+.form-title:hover {
+  background: #45804a;
+}
+
+.form-title:focus {
+  outline: none !important;
+}
+
+.h2-second {
+  background: #4855ad;
+}
+
+.h2-second:hover {
+  background: #3c478f;
+}
+
 .form-style {
   padding: 20px;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   margin: 20px 0;
-}
-
-.form-style h2 {
-  text-align: center;
-  font-size: 18px;
-  text-transform: uppercase;
-  letter-spacing: 5px;
-  padding: 10px;
-  border-radius: 5px;
-  color: #fff;
-  background: #54a55b;
-}
-
-.form-style .h2-second {
-  background: #4855ad;
 }
 
 .form-style form {
